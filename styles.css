@@ -80,8 +80,10 @@ tr:first-child .rank { color: white; background: var(--orange); }
 .match__number { display: grid; place-items: center; color: #fff; background: var(--navy); font-size: .78rem; font-weight: 600; }
 .match.played .match__number { background: var(--green); }
 .match__content { padding: 13px 14px; }
-.match__teams { display: grid; grid-template-columns: 1fr 26px 1fr; align-items: center; gap: 5px; font-size: .82rem; }
-.match__teams span:last-child { text-align: right; }
+.match__teams { display: grid; grid-template-columns: 1fr 26px 1fr; align-items: stretch; gap: 6px; font-size: .82rem; }
+.match__team { display: flex; align-items: center; min-height: 48px; padding: 8px 10px; color: white; border-radius: 7px; font-weight: 500; line-height: 1.35; }
+.match__team--red { background: #c83b3b; }
+.match__team--blue { justify-content: flex-end; background: #2766ad; text-align: right; }
 .versus { color: var(--orange); font-size: .7rem; font-weight: 700; text-align: center !important; }
 .match select { width: 100%; margin-top: 11px; padding: 7px 30px 7px 9px; color: var(--muted); background: #f5f3ee; border: 1px solid #dfdbd2; border-radius: 7px; font-size: .75rem; }
 .match.played select { color: var(--green); background: #eef7f2; border-color: #bdd9cb; font-weight: 500; }

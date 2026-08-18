@@ -1,11 +1,11 @@
 const teams = [
-  { id: 1, name: "ทีม ๑", school: "ยางตลาดวิทยาคาร" },
-  { id: 2, name: "ทีม ๒", school: "ยางตลาดวิทยาคาร" },
-  { id: 3, name: "ทีม ๓", school: "ยางตลาดวิทยาคาร" },
-  { id: 4, name: "ทีม ๔", school: "เขาวงพิทยาคาร" },
-  { id: 5, name: "ทีม ๕", school: "เขาวงพิทยาคาร" },
-  { id: 6, name: "ทีม ๖", school: "สมสะอาดพิทยาสรรพ์" },
-  { id: 7, name: "ทีม ๗", school: "เมืองกาฬสินธุ์" }
+  { id: 1, name: "ทีม 1", school: "ยางตลาดวิทยาคาร" },
+  { id: 2, name: "ทีม 2", school: "ยางตลาดวิทยาคาร" },
+  { id: 3, name: "ทีม 3", school: "ยางตลาดวิทยาคาร" },
+  { id: 4, name: "ทีม 4", school: "เขาวงพิทยาคาร" },
+  { id: 5, name: "ทีม 5", school: "เขาวงพิทยาคาร" },
+  { id: 6, name: "ทีม 6", school: "สมสะอาดพิทยาสรรพ์" },
+  { id: 7, name: "ทีม 7", school: "เมืองกาฬสินธุ์" }
 ];
 
 const storageKey = "robot-round-robin-results-v1";
@@ -84,7 +84,7 @@ function renderMatches() {
         <div class="match__number">${String(index + 1).padStart(2, "0")}</div>
         <div class="match__content">
           <div class="match__teams">
-            <span>${match.home.name} · ${match.home.school}</span><span class="versus">VS</span><span>${match.away.name} · ${match.away.school}</span>
+            <span class="match__team match__team--red">${match.home.name} · ${match.home.school}</span><span class="versus">VS</span><span class="match__team match__team--blue">${match.away.name} · ${match.away.school}</span>
           </div>
           <select data-match="${match.id}" aria-label="ผลการแข่งขันคู่ที่ ${index + 1}">
             <option value="">ยังไม่แข่ง</option>
