@@ -1,0 +1,103 @@
+:root {
+  --navy: #17324d;
+  --navy-deep: #0e2438;
+  --orange: #ed6a3a;
+  --cream: #f5f1e8;
+  --paper: #fffdf8;
+  --ink: #182331;
+  --muted: #6d7780;
+  --line: #ded9cf;
+  --green: #267a5a;
+  font-family: "Prompt", system-ui, sans-serif;
+  color: var(--ink);
+  background: var(--cream);
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; min-width: 320px; }
+button, select { font: inherit; }
+button { cursor: pointer; }
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  color: white;
+  background: var(--navy);
+  border-bottom: 7px solid var(--orange);
+}
+.hero::before {
+  content: ""; position: absolute; inset: 0;
+  background-image: linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+  background-size: 42px 42px;
+}
+.hero__inner { position: relative; max-width: 1120px; margin: auto; padding: 54px 28px 46px; z-index: 1; }
+.eyebrow { color: #f49a75; font-size: .75rem; letter-spacing: .18em; font-weight: 600; }
+h1 { margin: 12px 0 10px; max-width: 760px; font-size: clamp(2.2rem, 5vw, 4.25rem); line-height: 1.12; letter-spacing: -.035em; }
+h1 span { color: #ffd4b9; }
+.hero p { margin: 0; color: #ccd7df; }
+.summary { display: flex; gap: 0; width: fit-content; margin-top: 34px; border: 1px solid rgba(255,255,255,.18); border-radius: 12px; overflow: hidden; background: rgba(5,17,28,.22); }
+.summary div { display: flex; align-items: baseline; gap: 8px; padding: 11px 20px; border-right: 1px solid rgba(255,255,255,.15); }
+.summary div:last-child { border: 0; }
+.summary strong { font-size: 1.35rem; color: #fff; }
+.summary span { font-size: .75rem; color: #b8c5ce; }
+.robot-mark { position: absolute; right: max(4vw, 30px); bottom: -80px; color: rgba(255,255,255,.05); font-size: 310px; line-height: 1; }
+
+main { max-width: 1120px; margin: 0 auto; padding: 36px 28px 70px; }
+.panel { margin-bottom: 32px; padding: 28px; background: var(--paper); border: 1px solid var(--line); border-radius: 16px; box-shadow: 0 12px 35px rgba(42,48,53,.06); }
+.section-heading { display: flex; align-items: center; justify-content: space-between; gap: 18px; margin-bottom: 24px; }
+.section-heading > div:first-child { display: flex; align-items: center; gap: 12px; }
+.section-number { color: var(--orange); font-size: .75rem; font-weight: 700; letter-spacing: .1em; }
+h2 { margin: 0; font-size: 1.45rem; letter-spacing: -.02em; }
+.button { border: 0; border-radius: 8px; padding: 9px 13px; }
+.button--ghost { color: #9a3925; background: #fff1e8; border: 1px solid #f1c7b6; }
+.button--ghost:hover { background: #ffe5d6; }
+
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; text-align: center; }
+th { padding: 10px 12px; color: var(--muted); font-size: .75rem; font-weight: 500; border-bottom: 1px solid var(--line); }
+td { padding: 14px 12px; border-bottom: 1px solid #ebe7df; }
+tbody tr:last-child td { border-bottom: 0; }
+.team-col, td.team-cell { min-width: 260px; text-align: left; }
+.team-name { font-weight: 600; }
+.team-school { display: block; color: var(--muted); font-size: .78rem; }
+.rank { width: 30px; height: 30px; display: inline-grid; place-items: center; border-radius: 50%; background: #ece9e2; font-weight: 700; }
+tr:first-child .rank { color: white; background: var(--orange); }
+.points { color: var(--navy); font-size: 1.15rem; font-weight: 700; }
+.note { margin: 16px 0 0; color: var(--muted); font-size: .72rem; }
+
+.filter { display: flex; padding: 3px; border-radius: 9px; background: #ebe7df; }
+.filter__button { border: 0; padding: 7px 12px; color: var(--muted); background: transparent; border-radius: 7px; font-size: .78rem; }
+.filter__button.active { color: var(--navy); background: white; box-shadow: 0 2px 8px rgba(0,0,0,.07); font-weight: 600; }
+.matches { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.round-heading { grid-column: 1 / -1; display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-top: 12px; padding: 10px 2px 3px; border-bottom: 2px solid var(--navy); }
+.round-heading:first-child { margin-top: 0; }
+.round-heading span { color: var(--navy); font-size: 1rem; font-weight: 700; }
+.round-heading small { color: var(--orange); font-size: .75rem; font-weight: 500; }
+.round-heading.hidden { display: none; }
+.match { display: grid; grid-template-columns: 42px 1fr; overflow: hidden; border: 1px solid var(--line); border-radius: 12px; background: #fff; transition: .18s ease; }
+.match:hover { transform: translateY(-1px); box-shadow: 0 7px 18px rgba(30,40,48,.07); }
+.match.hidden { display: none; }
+.match__number { display: grid; place-items: center; color: #fff; background: var(--navy); font-size: .78rem; font-weight: 600; }
+.match.played .match__number { background: var(--green); }
+.match__content { padding: 13px 14px; }
+.match__teams { display: grid; grid-template-columns: 1fr 26px 1fr; align-items: center; gap: 5px; font-size: .82rem; }
+.match__teams span:last-child { text-align: right; }
+.versus { color: var(--orange); font-size: .7rem; font-weight: 700; text-align: center !important; }
+.match select { width: 100%; margin-top: 11px; padding: 7px 30px 7px 9px; color: var(--muted); background: #f5f3ee; border: 1px solid #dfdbd2; border-radius: 7px; font-size: .75rem; }
+.match.played select { color: var(--green); background: #eef7f2; border-color: #bdd9cb; font-weight: 500; }
+footer { padding: 24px; color: var(--muted); background: #eae5dc; text-align: center; font-size: .75rem; }
+
+@media (max-width: 760px) {
+  .hero__inner { padding: 38px 20px 34px; }
+  .summary { width: 100%; }
+  .summary div { flex: 1; justify-content: center; padding: 9px; }
+  .summary span { display: none; }
+  main { padding: 24px 14px 50px; }
+  .panel { padding: 18px 14px; }
+  .section-heading { align-items: flex-start; }
+  .matches { grid-template-columns: 1fr; }
+  .round-heading { flex-direction: column; gap: 2px; }
+  .matches-panel .section-heading { flex-direction: column; }
+  .filter { width: 100%; }
+  .filter__button { flex: 1; }
+}

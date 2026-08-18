@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#17324d">
+  <title>ตารางการแข่งขันหุ่นยนต์</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="hero">
+    <div class="hero__inner">
+      <div class="eyebrow">ROBOT ROUND ROBIN · 7 TEAMS</div>
+      <h1>ตารางการแข่งขัน<br><span>หุ่นยนต์ขนส่งอัจฉริยะ</span></h1>
+      <p>ระบบพบกันหมด บันทึกผลการแข่งขันและสรุปอันดับแบบอัตโนมัติ</p>
+      <div class="summary" aria-label="สรุปการแข่งขัน">
+        <div><strong id="totalMatches">21</strong><span>คู่ทั้งหมด</span></div>
+        <div><strong id="playedMatches">0</strong><span>แข่งแล้ว</span></div>
+        <div><strong id="remainingMatches">21</strong><span>เหลือ</span></div>
+      </div>
+    </div>
+    <div class="robot-mark" aria-hidden="true">⚙</div>
+  </header>
+
+  <main>
+    <section class="panel standings-panel">
+      <div class="section-heading">
+        <div><span class="section-number">01</span><h2>ตารางคะแนน</h2></div>
+        <button id="resetButton" class="button button--ghost" type="button">ล้างผลทั้งหมด</button>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>อันดับ</th><th class="team-col">ทีม / โรงเรียน</th><th>แข่ง</th><th>ชนะ</th><th>แพ้</th><th>คะแนน</th></tr></thead>
+          <tbody id="standingsBody"></tbody>
+        </table>
+      </div>
+      <p class="note">เกณฑ์อันดับ: คะแนนมากที่สุด → จำนวนครั้งที่ชนะ → หมายเลขทีม (ชนะ = 3 คะแนน)</p>
+    </section>
+
+    <section class="panel matches-panel">
+      <div class="section-heading">
+        <div><span class="section-number">02</span><h2>โปรแกรมการแข่งขัน</h2></div>
+        <div class="filter" role="group" aria-label="กรองรายการแข่งขัน">
+          <button class="filter__button active" data-filter="all" type="button">ทั้งหมด</button>
+          <button class="filter__button" data-filter="pending" type="button">ยังไม่แข่ง</button>
+          <button class="filter__button" data-filter="played" type="button">แข่งแล้ว</button>
+        </div>
+      </div>
+      <div id="matches" class="matches"></div>
+    </section>
+  </main>
+
+  <footer>ข้อมูลจะถูกบันทึกไว้ในเบราว์เซอร์เครื่องนี้โดยอัตโนมัติ</footer>
+  <script src="app.js"></script>
+</body>
+</html>
