@@ -71,6 +71,8 @@ function renderMatches() {
   container.innerHTML = matches.map((match, index) => {
     const winner = savedResults[match.id] || "";
     const played = Boolean(winner);
+    const homeWon = winner !== "draw" && Number(winner) === match.home.id;
+    const awayWon = winner !== "draw" && Number(winner) === match.away.id;
     const hidden = currentFilter === "played" ? !played : currentFilter === "pending" ? played : false;
     const roundHeader = match.round !== previousRound
       ? `<div class="round-heading ${hidden && !matches.filter(item => item.round === match.round).some(item => currentFilter === "all" || (currentFilter === "played" ? savedResults[item.id] : !savedResults[item.id])) ? "hidden" : ""}">
@@ -85,7 +87,7 @@ function renderMatches() {
         <div class="match__number">${String(index + 1).padStart(2, "0")}</div>
         <div class="match__content">
           <div class="match__teams">
-            <span class="match__team match__team--red">${match.home.name} · ${match.home.school}</span><span class="versus">VS</span><span class="match__team match__team--blue">${match.away.name} · ${match.away.school}</span>
+            <span class="match__team match__team--red ${homeWon ? "match__team--winner" : ""}">${match.home.name} · ${match.home.school}${homeWon ? " 🏆" : ""}</span><span class="versus">VS</span><span class="match__team match__team--blue ${awayWon ? "match__team--winner" : ""}">${awayWon ? "🏆 " : ""}${match.away.name} · ${match.away.school}</span>
           </div>
           <select data-match="${match.id}" aria-label="ผลการแข่งขันคู่ที่ ${index + 1}">
             <option value="">ยังไม่แข่ง</option>

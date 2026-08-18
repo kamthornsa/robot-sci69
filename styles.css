@@ -84,6 +84,14 @@ tr:first-child .rank { color: white; background: var(--orange); }
 .match__team { display: flex; align-items: center; min-height: 48px; padding: 8px 10px; color: white; border-radius: 7px; font-weight: 500; line-height: 1.35; }
 .match__team--red { background: #c83b3b; }
 .match__team--blue { justify-content: flex-end; background: #2766ad; text-align: right; }
+.match__team--winner,
+.match__team--red.match__team--winner,
+.match__team--blue.match__team--winner {
+  color: #3a2a00;
+  background: linear-gradient(135deg, #f8d76b, #dcae26);
+  box-shadow: inset 0 0 0 1px rgba(119, 79, 0, .24), 0 3px 9px rgba(193, 142, 15, .22);
+  font-weight: 700;
+}
 .versus { color: var(--orange); font-size: .7rem; font-weight: 700; text-align: center !important; }
 .match select { width: 100%; margin-top: 11px; padding: 7px 30px 7px 9px; color: var(--muted); background: #f5f3ee; border: 1px solid #dfdbd2; border-radius: 7px; font-size: .75rem; }
 .match.played select { color: var(--green); background: #eef7f2; border-color: #bdd9cb; font-weight: 500; }
