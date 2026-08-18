@@ -60,6 +60,7 @@ matches.push(...createRoundRobinSchedule(teams));
 
 function resultText(match, winnerId) {
   if (!winnerId) return "ยังไม่แข่ง";
+  if (winnerId === "draw") return "เสมอ";
   const winner = Number(winnerId) === match.home.id ? match.home : match.away;
   return `${winner.name} ชนะ`;
 }
@@ -89,6 +90,7 @@ function renderMatches() {
           <select data-match="${match.id}" aria-label="ผลการแข่งขันคู่ที่ ${index + 1}">
             <option value="">ยังไม่แข่ง</option>
             <option value="${match.home.id}" ${String(winner) === String(match.home.id) ? "selected" : ""}>${match.home.name} ชนะ</option>
+            <option value="draw" ${winner === "draw" ? "selected" : ""}>เสมอ · ได้ทีมละ 1 คะแนน</option>
             <option value="${match.away.id}" ${String(winner) === String(match.away.id) ? "selected" : ""}>${match.away.name} ชนะ</option>
           </select>
         </div>
@@ -97,7 +99,7 @@ function renderMatches() {
 
   container.querySelectorAll("select").forEach(select => {
     select.addEventListener("change", event => {
-      if (event.target.value) savedResults[event.target.dataset.match] = Number(event.target.value);
+      if (event.target.value) savedResults[event.target.dataset.match] = event.target.value === "draw" ? "draw" : Number(event.target.value);
       else delete savedResults[event.target.dataset.match];
       localStorage.setItem(storageKey, JSON.stringify(savedResults));
       render();
@@ -106,10 +108,18 @@ function renderMatches() {
 }
 
 function renderStandings() {
-  const table = teams.map(team => ({ ...team, played: 0, wins: 0, losses: 0, points: 0 }));
+  const table = teams.map(team => ({ ...team, played: 0, wins: 0, draws: 0, losses: 0, points: 0 }));
   Object.entries(savedResults).forEach(([matchId, winnerId]) => {
     const match = matches.find(item => item.id === matchId);
     if (!match) return;
+    if (winnerId === "draw") {
+      const home = table.find(team => team.id === match.home.id);
+      const away = table.find(team => team.id === match.away.id);
+      if (!home || !away) return;
+      home.played++; home.draws++; home.points++;
+      away.played++; away.draws++; away.points++;
+      return;
+    }
     const winner = table.find(team => team.id === Number(winnerId));
     const loserId = match.home.id === Number(winnerId) ? match.away.id : match.home.id;
     const loser = table.find(team => team.id === loserId);
@@ -118,12 +128,12 @@ function renderStandings() {
     loser.played++; loser.losses++;
   });
 
-  table.sort((a, b) => b.points - a.points || b.wins - a.wins || a.id - b.id);
+  table.sort((a, b) => b.points - a.points || b.wins - a.wins || b.draws - a.draws || a.id - b.id);
   document.querySelector("#standingsBody").innerHTML = table.map((team, index) => `
     <tr>
       <td><span class="rank">${index + 1}</span></td>
       <td class="team-cell"><span class="team-name">${team.name}</span><span class="team-school">${team.school}</span></td>
-      <td>${team.played}</td><td>${team.wins}</td><td>${team.losses}</td><td class="points">${team.points}</td>
+      <td>${team.played}</td><td>${team.wins}</td><td>${team.draws}</td><td>${team.losses}</td><td class="points">${team.points}</td>
     </tr>`).join("");
 
   const played = Object.keys(savedResults).filter(id => matches.some(match => match.id === id)).length;
